@@ -82,25 +82,32 @@ nav{
     transform: skew(21deg);
   }
   
-  .register-btn::before {
-    content: '';
+
+
+  #user-section {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  #register-btn, #login-btn {
+    padding: 8px;
+    margin: 0 10px;
+    background-color: #fff;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+
+  .info-box{
     position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 100%;
-    left: 0;
-    background: rgb(20, 20, 20);
-    opacity: 0;
-    z-index: -1;
-    transition: all 0.5s;
+    top: 30%;
+    background-color: black;
+    color: #663300;
+    left: 25%;
+    border-radius: 20px;
+    width: 700px;
+    height: 300px;
   }
   
-  .register-btn:hover {
-    color: #fff;
-  }
-  
-  .register-btn:hover::before {
-    left: 0;
-    right: 0;
-    opacity: 1;
-  }

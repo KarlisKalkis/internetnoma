@@ -11902,3 +11902,7 @@ body {
 .pr{
   padding-left: ;
 }
+
+.mw{
+  max-width: 105%;
+}

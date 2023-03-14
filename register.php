@@ -2,17 +2,31 @@
 session_start();
 
   include("connection.php");
-
   include("functions.php");
 
   if($_SERVER['REQUEST_METHOD'] == "POST")
   {
     //something was posted
 
-    $_POST['']
+    $user_name = $_POST['users_name'];
+    $user_email = $_POST['users_email'];
+    $password = $_POST['password'];
+
+    if(!empty($users_name) && !empty($password) && !empty($users_email) && !is_numeric($users_name))
+    {
+      //saglabat datu baze
+      $user_id = uniqid();
+      $query = "insert into users (users_id, users_name,users_email, password) values('$users_id', '$users_name', '$users_email', '$password')";
+
+      mysqli_query($con, $query);
+
+      header("Location: login.php");
+      die;
+    }else
+    {
+      echo "Please enter some valid information";
+    }
   }
-
-
 ?>
 
 
@@ -64,17 +78,17 @@ session_start();
                         <div id="box">
                             <form method="post">
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="email" class="form-control form-control-lg" name="email" />
+                                    <input type="email" id="email" class="form-control form-control-lg" name="users_email" />
                                     <label class="form-label" for="form2Example17">Email address</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="text" class="form-control form-control-lg" name="user_name" />
+                                    <input type="text" class="form-control form-control-lg" name="users_name" />
                                     <label class="form-label" for="form2Example17">Name</label>
                                 </div>
       
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="text" class="form-control form-control-lg" name="password" />
+                                    <input type="password" class="form-control form-control-lg" name="password" />
                                     <label class="form-label" for="form2Example27">Password</label>
                                 </div>
       

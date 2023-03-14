@@ -6,12 +6,35 @@
     if($_SERVER['REQUEST_METHOD'] == "POST")
     {
       //lietotājs ir piespiedis pievienoties
-      $user_name = $_POST['user_name'];
+      $users_name = $_POST['users_name'];
       $password = $_POST['password'];
 
-      if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
+      if(!empty($users_name) && !empty($password) && !is_numeric($users_name))
       {
         
+        // datu bazes datu nolasisana
+        $query = "select * from users where users_name = '$users_name' limit 1";
+        $result = mysqli_query($con, $query);
+
+        if($result)
+        {
+          if ($result && mysqli_num_rows($result) > 0)
+          {
+            $users_data = mysqli_fetch_assoc($result);
+
+            if($users_data['password'] === $password)
+            {
+              $SESSION['users_id'] = $users_data['users_id'];
+              header("Location: index.php");
+              die;
+            }
+          }
+        }
+
+        echo "wrong email or password";
+      }else
+      {
+        echo "wrong email or password";
       }
     }
 
@@ -66,8 +89,8 @@
                         <div id="box">
                             <form method="post">
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="form2Example17" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form2Example17">Email address</label>
+                                    <input type="text" id="form2Example17" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form2Example17">User name</label>
                                 </div>
       
                                 <div class="form-outline mb-4">

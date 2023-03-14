@@ -1,5 +1,19 @@
 <?php 
+  session_start();
+  include("connection.php");
+  include("functions.php");
 
+  if($_SERVER['REQUEST_METHOD'] == "POST")
+  {
+    //lietotājs ir piespiedis pievienoties
+    $user_name = $_POST['user_name'];
+    $password = $_POST['password'];
+
+    if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
+    {
+
+    }
+  }
 
 ?>
 

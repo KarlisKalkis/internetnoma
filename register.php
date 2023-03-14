@@ -5,7 +5,12 @@ session_start();
 
   include("functions.php");
 
-  $user_data = check_login($con);
+  if($_SERVER['REQUEST_METHOD'] == "POST")
+  {
+    //something was posted
+
+    $_POST['']
+  }
 
 
 ?>
@@ -59,22 +64,22 @@ session_start();
                         <div id="box">
                             <form method="post">
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="form2Example17" class="form-control form-control-lg" />
+                                    <input type="email" id="email" class="form-control form-control-lg" name="email" />
                                     <label class="form-label" for="form2Example17">Email address</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="form2Example17" class="form-control form-control-lg" />
+                                    <input type="text" id="text" class="form-control form-control-lg" name="user_name" />
                                     <label class="form-label" for="form2Example17">Name</label>
                                 </div>
       
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="form2Example27" class="form-control form-control-lg" />
+                                    <input type="password" id="text" class="form-control form-control-lg" name="password" />
                                     <label class="form-label" for="form2Example27">Password</label>
                                 </div>
       
                                 <div class="pt-1 mb-4">
-                                    <button class="btn btn-dark btn-lg btn-block" id="button" type="submit">Login</button>
+                                    <button class="btn btn-dark btn-lg btn-block" id="button" type="submit">Sign up</button>
                                 </div>
 
                             </form>

@@ -1,20 +1,12 @@
 <?php
 
-    $host="localhost";
-    $username="root";
-    $password = "";
-    $database = "internetnoma";
+    $db_user="root";
+    $db_pass = "";
+    $db_name = "internetnoma";
     
-    //Creating data base connection
-    $con = mysqli_connect($host, $username, $password, $database);
-
-
-    //Check database connection
-    if(!$con)
-    {
-        die("connection failed: ". mysqli_connect_error());
-    }
-    else{
-        echo "connected sucessfully";
-    }
+    
+    $db = new PDO('mysql:host=localhost;dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    
 ?>

@@ -61,7 +61,7 @@ require_once('config/dbcon.php');
                         <a class="small text-muted" href="index.html">Back to home page</a>
                         <br>
                         <a class="small text-muted" href="#!">Forgot password?</a>
-                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Have account<a href="login.html"
+                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Have account<a href="login.php"
                             style="color: #393f81;">come in here</a></p>
 
                         

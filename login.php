@@ -1,4 +1,12 @@
+<?php  
+
+session_start();
+if(isset($_SESSION['userLogin'])){
+    header("Location: index.php");
+} ?>
+
 <?php include 'loginandregisterneeded/header.php' ?>
+
 
 
 <!--begins main part for form-->
@@ -23,24 +31,31 @@
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
                                     <div class="form-outline mb-4">
-                                        <input type="email" id="form2Example17" class="form-control form-control-lg" />
-                                        <label class="form-label" for="form2Example17">Email address</label>
+                                        <input type="email" id="email" name="email" class="form-control form-control-lg" required />
+                                        <label class="form-label">Email address</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input type="password" id="form2Example27" class="form-control form-control-lg" />
-                                        <label class="form-label" for="form2Example27">Password</label>
+                                        <input type="password" id="password" name="password" class="form-control form-control-lg" required />
+                                        <label class="form-label">Password</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" name="rememberme" class="custom-control-input" id="customControlInline">
+                                            <label class="custom-control-label mb-3" for="customControlInline">Remember me </label>
+                                        </div>
                                     </div>
 
                                     <div class="pt-1 mb-4">
-                                        <button class="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                                        <button class="btn btn-dark btn-lg btn-block" name="loginbuttton" id="login" type="button">Login</button>
                                     </div>
 
 
                                     <a class="small text-muted" href="index.html">Back to home page</a>
                                     <br>
                                     <a class="small text-muted" href="#!">Forgot password?</a>
-                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="register.html" style="color: #393f81;">Register here</a></p>
+                                    <p class="pb-lg-5" style="color: #393f81;">Don't have an account? <a href="user_register.php" style="color: #393f81;">Register here</a></p>
 
 
                                 </form>
@@ -57,6 +72,37 @@
 
 <!--Includes scripts that are needed-->
 <?php include 'loginandregisterneeded/scriptsincluded.php' ?>
+
+<script>
+    $(function(){
+        $('#login').click(function(e){
+        
+            var valid = this.form.checkValidity();
+            
+            if(valid){
+                var email       = $('#email').val();
+                var password    = $('#password').val();
+            }
+
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: 'loginprocess.php',
+                data: {email: email, password: password},
+                success: function(data){
+                    alert(data);
+                    if($.trim(data) === "1"){
+                        setTimeout(' document.location.href = "index.php"', 100);
+                    }
+                },
+                error: function(data){
+                    alert('error');
+                }
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

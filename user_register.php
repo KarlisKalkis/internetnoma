@@ -2,49 +2,9 @@
 require_once('config/dbcon.php');
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>MLTA rent</title>
-        <link rel="icon" type="image/x-icon" href="images/needed/logo_size_invert.jpg" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
-        
-        
-        <!--Bootstrap connecting-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<?php include 'loginandregisterneeded/header.php'?>
 
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="styles.css" rel="stylesheet" />
-    </head>
 
-    <div>
-        <?php
-        if (isset($_POST['create'])) {
-            $email          = $_POST['email'];
-            $firstname      = $_POST['firstname'];
-            $lastname       = $_POST['lastname'];
-            $phonenumber    = $_POST['phonenumber'];
-            $password       = $_POST['password'];
-
-           $sql = "INSERT INTO users (email, firstname, lastname, phonenumber, password ) VAlUES(?,?,?,?,?)";
-           $stmtinsert = $db->prepare($sql);
-           $result = $stmtinsert->execute([$email, $firstname, $lastname, $phonenumber, $password]);
-           if($result){
-            echo 'succesfully saved';
-           }else{
-            echo 'there were errors saving data';
-           }
-        }
-        ?>
-    </div>
 
 
     <section class="mh-100" style="background-color: #364434;">
@@ -69,32 +29,32 @@ require_once('config/dbcon.php');
                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Create your account</h5>
       
                         <div class="form-outline mb-4">
-                          <input type="email" name="email" class="form-control form-control-lg" required />
+                          <input type="email" name="email" id="email" class="form-control form-control-lg" required />
                           <label class="form-label" for="email">Email address</label>
                         </div>
 
                         <div class="form-outline mb-4">
-                            <input type="text" name="firstname" class="form-control form-control-lg" required />
+                            <input type="text" name="firstname" id="firstname" class="form-control form-control-lg" required />
                             <label class="form-label" for="firstname">First name</label>
                         </div>
 
                         <div class="form-outline mb-4">
-                            <input type="text" name="lastname" class="form-control form-control-lg" required />
+                            <input type="text" name="lastname" id="lastname" class="form-control form-control-lg" required />
                             <label class="form-label" for="lastname">Last name</label>
                         </div>
 
                         <div class="form-outline mb-4">
-                            <input type="text" name="phonenumber" class="form-control form-control-lg" required />
+                            <input type="text" name="phonenumber" id="phonenumber" class="form-control form-control-lg" required />
                             <label class="form-label" for="phonenumber">Phone number</label>
                         </div>
       
                         <div class="form-outline mb-4">
-                          <input type="password" name="password" class="form-control form-control-lg" required />
+                          <input type="password" name="password" id="password" class="form-control form-control-lg" required />
                           <label class="form-label" for="password">Password</label>
                         </div>
       
                         <div class="pt-1 mb-4">
-                            <input class="btn btn-dark" type="submit" name="create" value="Register">
+                            <input class="btn btn-dark" type="submit" name="create" id="register" value="Register">
                         </div>
 
 
@@ -116,11 +76,64 @@ require_once('config/dbcon.php');
         </div>
       </section>
 
-      <script src="javascript.js"></script>
-      <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+      <?php include 'loginandregisterneeded/scriptsincluded.php'?>
+      <script type="text/javascript">
+        $(function(){
+          $('#register').click(function(e){
+
+            var valid = this.form.checkValidity();
+            
+            if(valid){
+
+            var email           = $('#email').val();
+            var firstname       = $('#firstname').val();
+            var lastname        = $('#lastname').val();
+            var phonenumber     = $('#phonenumber').val();
+            var password        = $('#password').val();
+
+
+              e.preventDefault();
+
+              $.ajax({
+                type: 'POST',
+                url: 'process.php',
+                data: {email: email, firstname: firstname, lastname: lastname, phonenumber: phonenumber, 
+                  password: password},
+
+
+                success: function(data){
+                Swal.fire({
+                'title': 'Succesfully saved',
+                'text': data,
+                'icon': 'success'
+                })
+
+                },
+
+                error: function(data){
+                  Swal.fire({
+                  'title': 'You came to error',
+                  'text': 'There were errors saving your data',
+                  'icon': 'error'
+                })
+                },
+              });
+
+
+              
+            }else{
+              
+            }
+
+
+          });
+
+            
+          });
+
+      </script>
       
-      </body>
+    
+    </body>
   
   </html>

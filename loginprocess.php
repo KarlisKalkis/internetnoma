@@ -7,6 +7,7 @@ require_once('config/dbcon.php');
 $email = $_POST['email'];
 $password = $_POST['password'];
 
+
 $sql = "SELECT * FROM users WHERE email= ? AND password= ? LIMIT 1";
 $stmtselect = $db->prepare($sql);
 $result = $stmtselect->execute([$email, $password]);
@@ -15,7 +16,7 @@ if($result){
     $user = $stmtselect->fetch(PDO::FETCH_ASSOC);
     if($stmtselect->rowCount() > 0){
         $_SESSION['userLogin'] = $user;
-        echo '1';
+        echo 'Welcome back! We are glad to see you back';
     }else{
         echo 'There isnt user with that info';
     }

@@ -92,8 +92,8 @@ if(isset($_SESSION['userLogin'])){
                 data: {email: email, password: password},
                 success: function(data){
                     alert(data);
-                    if($.trim(data) === "1"){
-                        setTimeout(' document.location.href = "index.php"', 100);
+                    if($.trim(data) === "Welcome back! We are glad to see you back"){
+                        setTimeout(' document.location.href = "index.php"', 10);
                     }
                 },
                 error: function(data){

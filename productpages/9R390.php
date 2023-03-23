@@ -1,19 +1,19 @@
-<?php include 'productsheader.php' ?>
-<?php include 'config/dbcon.php' ?>
+<?php include '../config/dbcon.php'?>
+<?php include '../productsheader.php'?>
 
 
+<!--Header for home improvement-->
 <div class="container mt-5 pt-5">
     <div class="row d-flex">
         <div class="col-md-12 text-center">
-            <h2 class="text-white-50">Tractors that we provide</h1>
+            <h2 class="text-white-50">Home improvement products</h2>
         </div>
     </div>
 </div>
 
+
 <?php
-
-
-$sql = "SELECT * FROM products WHERE ID_Categorie = 1 ";
+$sql = "SELECT * FROM products WHERE ID_Categorie = 3 ";
 $stmtselect = $db->prepare($sql);
 if ($stmtselect->execute()) {
     $productstractors = $stmtselect->fetchAll();
@@ -48,7 +48,4 @@ if ($stmtselect->execute()) {
     </div>
 </div>
 
-
-
-        <?php
-        include 'footer.php' ?>
+<?php include '../mainpagestyles/footerindex.php'?>

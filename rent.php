@@ -30,7 +30,7 @@
                             <h4>Tractors</h4>
                             <p class="text-black-50 mb-0">Our tractor selection is from 1990 year to nowadays</p>
                             <p class="text-black-50 mb-0">To see detalized about what we provide from tractors click button bellow</p>
-                            <a class="btn btn-info btn-lg btn-block" href="../internetnoma/tractorsAgriculture.html">Tractors</a>
+                            <a class="btn btn-info btn-lg btn-block" href="../internetnoma/tractorsAgriculture.php">Tractors</a>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                             <h4>Agriculture area and forest area rent</h4>
                             <p class="text-black-50 mb-0">Renting area for agriculture and forest deforestation</p>
                             <p class="text-black-50 mb-0">In button bellow you can see what type of land you can rent and is available</p>
-                            <a class="btn btn-info btn-lg btn-block" href="landrenting.html">Land areas</a>
+                            <a class="btn btn-info btn-lg btn-block" href="landrenting.php">Land areas</a>
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                             <h4>Home improvement products</h4>
                             <p class="text-black-50 mb-0">Renting products from washing products to bulldozers</p>
                             <p class="text-black-50 mb-0">We provide many products that can help your home look more beautiful</p>
-                            <a class="btn btn-info btn-lg btn-block" href="homeimprovement.html">Home improvement</a>
+                            <a class="btn btn-info btn-lg btn-block" href="homeimprovement.php">Home improvement</a>
                         </div>
                     </div>
                 </div>

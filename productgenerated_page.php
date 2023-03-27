@@ -40,11 +40,11 @@ if ($result->num_rows > 0) {
 </div>
 
 <div class="row gx-0 justify-content-center px-0">
-    <div class="col-lg-12 pt-5 order-lg-first">
+    <div class="col-lg-12 pt-0 order-lg-first">
         <div class="bg-white h-100 ">
             <div class="d-flex h-100">
                 <div class="project-text w-100 my-auto text-lg-right justify-content-center col-md-12 text-center">
-                    <h5 class="mb-0 text-black ">Price: <?php echo $row['price']?> EIRO a day</h5>
+                    <h5 class="mb-0 mt-4 text-black ">Price: <?php echo $row['price']?> EIRO a day</h5>
                     <!--Table for rent start and rent end-->
                     <div class="container mt-4 mb-4">
                         <div class="input">

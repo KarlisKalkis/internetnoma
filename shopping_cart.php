@@ -1,18 +1,36 @@
 <?php 
-session_start();
 include 'config/connectionproducts.php';
+
+// Prepare the SQL query to retrieve the renting point information
+$sql = "SELECT * FROM rentingpoints WHERE ID_categories = '2'";
+
+// Execute the SQL query
+$result = $conn->query($sql);
+?>
+
+<?php
+//check if product that has been input is right inputed
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+} else {
+    echo "Invalid renting point";
+}
+?>
+
+<?php 
 include 'productsheader.php';
+
 ?>
 
 
-
+<body>
 <section class="h-100 gradient-custom">
   <div class="container py-5">
     <div class="row d-flex justify-content-center my-4">
       <div class="col-md-8">
         <div class="card mb-4">
           <div class="card-header py-3">
-            <h5 class="mb-0">Cart - 2 items</h5>
+            <h5 class="mb-0">Your rented services at this moment</h5>
           </div>
           <div class="card-body">
             <!-- Single item -->
@@ -20,7 +38,7 @@ include 'productsheader.php';
               <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                 <!-- Image -->
                 <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
+                  <img src="products/5075Mtractor.jpg"
                     class="w-100" alt="Blue Jeans Jacket" />
                   <a href="#!">
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
@@ -31,9 +49,7 @@ include 'productsheader.php';
 
               <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
                 <!-- Data -->
-                <p><strong>Blue denim shirt</strong></p>
-                <p>Color: blue</p>
-                <p>Size: M</p>
+                <p><strong>5075M tractor</strong></p>
                 <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
                   title="Remove item">
                   <i class="fas fa-trash"></i>
@@ -55,7 +71,7 @@ include 'productsheader.php';
 
                   <div class="form-outline">
                     <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
-                    <label class="form-label" for="form1">Quantity</label>
+                    <label class="form-label" for="form1">reserve for days</label>
                   </div>
 
                   <button class="btn btn-primary px-3 ms-2"
@@ -139,24 +155,25 @@ include 'productsheader.php';
         </div>
         <div class="card mb-4">
           <div class="card-body">
-            <p><strong>Expected shipping delivery</strong></p>
-            <p class="mb-0">12.10.2020 - 14.10.2020</p>
+            <p><strong>For info and about delivering these products contact our client experts</strong></p>
+            <p class="mb-0"><?php echo $row['City']?>, <?php echo $row['Street']?>, <?php echo $row['Street_number']?></p>
+
           </div>
         </div>
         <div class="card mb-4 mb-lg-0">
           <div class="card-body">
             <p><strong>We accept</strong></p>
             <img class="me-2" width="45px"
-              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+              src="excess_pictures/visa_logo.jpg"
               alt="Visa" />
             <img class="me-2" width="45px"
-              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+              src="excess_pictures/american_express.png"
               alt="American Express" />
             <img class="me-2" width="45px"
-              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+              src="excess_pictures/mastercard.jpg"
               alt="Mastercard" />
             <img class="me-2" width="45px"
-              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.webp"
+              src="excess_pictures/paypal-logo.png"
               alt="PayPal acceptance mark" />
           </div>
         </div>
@@ -190,7 +207,7 @@ include 'productsheader.php';
             </ul>
 
             <button type="button" class="btn btn-primary btn-lg btn-block">
-              Go to checkout
+              Add reservation
             </button>
           </div>
         </div>
@@ -198,5 +215,7 @@ include 'productsheader.php';
     </div>
   </div>
 </section>
+</body>
 
-<?php include 'mainpagestyles/footerindex.php' ?>
+
+

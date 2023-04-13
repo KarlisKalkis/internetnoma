@@ -3,6 +3,7 @@
 session_start();
 
 include 'config/connectionproducts.php';
+include 'add_to_cart.php';
 include 'productsheader.php';
 
 
@@ -37,7 +38,8 @@ if (isset($_POST['add-to-cart'])) {
         }else{
             $count = count($_SESSION['cart']);
             $item_array = array(
-                'product_id' => $_POST['product_id']
+                'product_id' => (int)$_POST['product_id'],
+                'name' =>  htmlspecialchars($_POST['name'])
             );
 
             $_SESSION['cart'][$count] = $item_array;
@@ -45,7 +47,9 @@ if (isset($_POST['add-to-cart'])) {
         }
     }else{
         $item_array = array(
-            'product_id' => $_POST['product_id']
+            'product_id' => $_POST['product_id'],
+            'name' =>$_POST['name']
+
         );
 
         //Create new session variable
@@ -89,7 +93,7 @@ if ($result->num_rows > 0) {
             <div class="bg-white h-100 ">
                 <div class="d-flex h-100">
                     <div class="project-text w-100 my-auto text-lg-right justify-content-center col-md-12 text-center">
-                        <h5 class="mb-0 mt-4 text-black ">Price: <?php echo $row['price'] ?> EIRO a day</h5>
+                        <h5 class="mb-0 mt-4 text-black" >Price: <?php echo $row['price'] ?> EIRO a day</h5>
                         <!--Table for rent start and rent end-->
                         <div class="container mt-4 mb-4">
                             <div class="input">
@@ -106,7 +110,8 @@ if ($result->num_rows > 0) {
 
                         <button type="submit" class="btn btn-dark col-12" name="add-to-cart" id="add-to-cart">Rent now</button>
                         <input type="hidden" name='product_id' value=<?php 
-                            print_r ($row['ID'])
+                            print_r ($row['ID']);
+                            print_r($row['name'])
                         ?>>
 
                     </div>

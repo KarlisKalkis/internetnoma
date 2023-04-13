@@ -1,31 +1,52 @@
 <?php
-// If the user clicked the add to cart button on the product page we can check for the form data
-if (isset($_POST['product_id'], $_POST['quantity']) && is_numeric($_POST['product_id']) && is_numeric($_POST['quantity'])) {
-    // Set the post variables so we easily identify them, also make sure they are integer
-    $product_id = (int)$_POST['product_id'];
-    $quantity = (int)$_POST['quantity'];
-    // Prepare the SQL statement, we basically are checking if the product exists in our databaser
-    $stmt = $pdo->prepare('SELECT * FROM products WHERE id = ?');
-    $stmt->execute([$_POST['product_id']]);
-    // Fetch the product from the database and return the result as an Array
-    $product = $stmt->fetch(PDO::FETCH_ASSOC);
-    // Check if the product exists (array is not empty)
-    if ($product && $quantity > 0) {
-        // Product exists in database, now we can create/update the session variable for the cart
-        if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
-            if (array_key_exists($product_id, $_SESSION['cart'])) {
-                // Product exists in cart so just update the quanity
-                $_SESSION['cart'][$product_id] += $quantity;
-            } else {
-                // Product is not in cart so add it
-                $_SESSION['cart'][$product_id] = $quantity;
-            }
-        } else {
-            // There are no products in cart, this will add the first product to cart
-            $_SESSION['cart'] = array($product_id => $quantity);
+
+// check if the 'add to cart' button has been submitted
+if (isset($_POST['add-to-cart'])) {
+
+    // check if the cart session variable exists
+    if (!isset($_SESSION['cart'])) {
+        // if not, initialize the cart as an empty array
+        $_SESSION['cart'] = array();
+    }
+
+    // check if the product is already in the cart
+    $product_id = $_POST['product_id'];
+    $product_name = $_POST['name'];
+    $product_price = $_POST['product_price'];
+    $product_quantity = $_POST['product_quantity'];
+
+    $item_already_in_cart = false;
+    foreach ($_SESSION['cart'] as $key => $item) {
+        if ($item['product_id'] == $product_id) {
+            // if it is, update the quantity
+            $_SESSION['cart'][$key]['product_quantity'] += $product_quantity;
+            $item_already_in_cart = true;
+            break;
         }
     }
-    // Prevent form resubmission...
-    header('location: index.php?page=cart');
-    exit;
+
+    // if it's not, add it to the cart
+    if (!$item_already_in_cart) {
+        $item = array(
+            'product_id' => $product_id,
+            'product_name' => $product_name,
+            'product_price' => $product_price,
+            'product_quantity' => $product_quantity
+        );
+        $_SESSION['cart'][] = $item;
+    }
+
+    // redirect to the cart page
+    header('Location: shopping_cart.php');
+    exit();
 }
+
+// display the contents of the cart
+if (isset($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $item) {
+        echo $item['product_name'] . ' - ' . $item['product_quantity'] . ' - ' . $item['product_price'] . '<br>';
+    }
+} else {
+    echo 'Your cart is empty.';
+}
+?>

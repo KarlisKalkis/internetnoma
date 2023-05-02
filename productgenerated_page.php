@@ -24,13 +24,9 @@ $products = array(
 $result = $conn->query($sql);
 
 if (isset($_POST['add-to-cart'])) {
-
-    //print_r($_POST['product_id']);
-
     if (isset($_SESSION['cart'])){
 
         $item_array_id = array_column($_SESSION['cart'], "product_id");
-        print_r($item_array_id);
 
         if(in_array($_POST['product_id'], $item_array_id)){
             echo "<script>alert ('Service or product is already in processing')</script>";
@@ -98,21 +94,18 @@ if ($result->num_rows > 0) {
                         <div class="container mt-4 mb-4">
                             <div class="input">
                                 <span>Rent in</span>
-                                <input type="date" name="" id="">
+                                <input type="date" name="rent-begin-date">
                             </div>
 
 
                             <div class="input mt-3">
                                 <span>Rent end date</span>
-                                <input type="date" name="" id="">
+                                <input type="date" name="rent-end-date">
                             </div>
                         </div>
 
                         <button type="submit" class="btn btn-dark col-12" name="add-to-cart" id="add-to-cart">Rent now</button>
-                        <input type="hidden" name='product_id' value=<?php 
-                            print_r ($row['ID']);
-                            print_r($row['name'])
-                        ?>>
+                        <input type="hidden" name='product_id' value="<?=$row['ID']?>">
 
                     </div>
                 </div>

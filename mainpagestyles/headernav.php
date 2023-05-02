@@ -37,7 +37,9 @@
                         <li class="nav-item"><a class="nav-link" href="rent.php">Rent</a></li>
                         <li class="nav-item"><a class="nav-link" href="aboutus.php">About Us</a></li>
                         <li class="nav-item"><a class="nav-link" href="rentp.php">Renting points</a></li>
+                        <li class="nav-item"><a class="nav-link" href="shopping_cart.php">Your cart</a></li>
                         <li class="nav-item"><a class="nav-link" href="index.php?logout=true">Logout</a></li>
+                        
                     </ul>
                 </div>
                 </div>

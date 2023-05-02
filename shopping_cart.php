@@ -3,6 +3,7 @@ session_start();
 
 include 'productsheader.php';
 include 'add_to_cart.php';
+include 'product_function.php';
 
 if (isset($_SESSION['cart'])) {
     $cart_items = array();
@@ -21,7 +22,11 @@ if (isset($_SESSION['cart'])) {
         "total" => $total
     );
     $_SESSION['cart_data'] = $cart_data;
-}
+}else{
+    if(isset($_SESSION['cart']) && empty($_SESSION['cart'])) {
+        echo 'Your shopping cart is empty';
+    }
+ }
 ?>
 
 <body class="bg-light">
@@ -33,7 +38,7 @@ if (isset($_SESSION['cart'])) {
                     
                     <form action="add_to_cart.php" method="post" class="cart-items">
                         <?php foreach ($_SESSION['cart'] as $product_id => $product) {
-                            echo "<script>console.log('objekta vertiba: " . $product . "')</script>"; ?>
+                            echo "<script>console.log('objekta vertiba: " . $cart_item['name'] . "')</script>"; ?>
                             <div class="border-rounded">
                                 <div class="row mt-4 mb-4 bg-white">
                                     <div class="col-md-3">

@@ -1,4 +1,15 @@
 <?php include 'mainpagestyles/headernav.php' ?>
+<?php include 'config/dbcon.php' ?>
+
+
+<?php
+$sql = "SELECT * FROM rentingpoints";
+$stmtselect = $db->prepare($sql);
+if ($stmtselect->execute()) {
+    $rentingpoints = $stmtselect->fetchAll();
+} else {
+    echo 'there were errors saving data';
+} ?>
 
 <header class="masthead-rent bg-black">
     <div class="container px-2 px-lg-0 d-flex h-100 align-items-center justify-content-center">
@@ -37,17 +48,15 @@
                         <div class="d-flex h-100">
                             <div class="project-text w-100 my-auto text-center text-lg-left">
                                 <h4 class="text-black">Renting points for agriculture tractors and others</h4>
+                                <?php foreach ($rentingpoints as $rentingpoints): ?>
+                                    <?php if ($rentingpoints['ID_categories'] == 1): ?>
                                 <p class="mb-0 text-black-50"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
                                         <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-                                    </svg>Riga, Meirovica iela 5</p>
+                                    </svg><?php echo $rentingpoints['City'] . ', ', $rentingpoints['Street'] . ' ', $rentingpoints['Street_number']?></p>
+                                <?php endif; ?>
+                            <?php endforeach;?>
 
-                                <p class="mb-0 text-black-50"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
-                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-                                    </svg>Valmiera, Miera iela 23</p>
-
-                                <p class="mb-0 text-black-50"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
-                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-                                    </svg>Jelgava, Centra prospekts 2</p>
+                                
                             </div>
                         </div>
                     </div>
@@ -62,9 +71,15 @@
                             <div class="project-text w-100 my-auto text-center text-lg-right">
                                 <h4 class="text-black">Renting land</h4>
 
-                                <p class="mb-0 text-black-50"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                                <?php foreach ($rentingpoints as $rentingpoints): ?>
+                                    <?php if ($rentingpoints['ID_categories'] == 3): ?>
+                                    <p class="mb-0 text-black-50"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
                                         <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-                                    </svg>Riga, Viesibas bulvaris 99</p>
+                                    </svg><?php echo $rentingpoints['City'] . ', ', $rentingpoints['Street'] . ' ', $rentingpoints['Street_number']?></p>
+                                    <?php endif; ?>
+                                    
+                                    <?php endforeach;?>
+
 
                                 <p class="mb-0 mt-5 text-black">All information about renting a land is possible to be descibed in phone or in consultation at our offices</p>
                             </div>
